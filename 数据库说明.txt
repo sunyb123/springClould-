@@ -1,0 +1,1 @@
+新增了一张表lagou_user 包含字段 id, name, password

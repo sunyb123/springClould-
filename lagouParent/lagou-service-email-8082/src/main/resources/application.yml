@@ -1,0 +1,23 @@
+#eureka server服务端口
+server:
+  port: 8082
+spring:
+  application:
+    name: lagou-server-email # 应用名称，应用名称会在Eureka中作为服务名称
+    # eureka 客户端配置（和Server交互），Eureka Server 其实也是一个Client
+  mail:
+    host: smtp.163.com
+    username: sunyb1029@163.com
+    password: BRHYMCVEVKEDSOLN
+#    password: syb123456
+
+eureka:
+  client:
+    service-url:
+      # 注册到集群，就把多个Eurekaserver地址使用逗号连接起来即可；注册到单实例（非集群模式），那就写一个就ok
+      defaultZone: http://LagouEurekaServerA:8090/eureka,http://LagouEurekaServerB:8091/eureka
+  instance:
+    prefer-ip-address: true  #服务实例中显示ip，而不是显示主机名（兼容老的eureka版本）
+    # 实例名称： 192.168.1.103:lagou-service-resume:8080，我们可以自定义它
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:@project.version@
+
